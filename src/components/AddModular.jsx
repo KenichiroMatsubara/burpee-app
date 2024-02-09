@@ -8,8 +8,8 @@ const AddModular = (props) => {
     const { year, month } = props;
     const usedispatch = useDispatch();
 
-    const Hour=[];
-    const [burpeeTime,setBurpeeTime] = useState("00:00");
+    const [burpeeH,setBurpeeH] = useState(0);
+    const [burpeeM,setBurpeeM] = useState(0);
     const [burpeePace,setBurpeePace] = useState("5.0");
 
     const [runPaceM,setRunPaceM] = useState();
@@ -34,6 +34,19 @@ const AddModular = (props) => {
     }
 
     const pushAdd = () => {
+        closeAddModular();
+        const addData = {};
+        return;
+    }
+
+    const optionReturn = (max) => {
+        const ARRAY = [];
+        for(let i=0;i<=max;i++) ARRAY.push(i);
+        return (<>
+            {ARRAY.map((data) => {
+                return <option value={data}>{data}</option>
+            })}
+        </>)
     }
 
     return (
@@ -41,7 +54,7 @@ const AddModular = (props) => {
             className=' mr-auto ml-auto
                 text-center
                 border border-gray-800 bg-white
-                w-60 h-56 pb-2
+                w-60 h-72 pb-2
                 flex flex-col
             '
         >
@@ -68,17 +81,24 @@ const AddModular = (props) => {
                             >{data}</option>
                     })}
                 </select>
+
+
                 {(kind==="burpee") &&(
-                    <div className=''>
-                        <div className=''>
-                            <label htmlFor='BurpeeTimeInput'>時間(H:S):</label>
-                            <input
-                                type='time'
-                                id="BurpeeTimeInput"
-                                value={burpeeTime}
-                                className='text-lg border rounded'
-                                onChange={(e) => setBurpeeTime(e.target.value)}
-                            />
+                    <div className='m-2'>
+                        <div>
+                            練習時間 H:S
+                            <select
+                                onChange={(e) => setBurpeeH(e.target.value)}
+                                className='border border-gray-400 rounded ml-2 p-1'
+                            >
+                                {optionReturn(24)}
+                            </select>:
+                            <select
+                                onChange={(e) => setBurpeeM(e.target.value)}
+                                className='border border-gray-400 rounded p-1'
+                            >
+                                {optionReturn(59)}
+                            </select>
                         </div>
 
                         <div className='m-2'>
@@ -87,31 +107,29 @@ const AddModular = (props) => {
                                 type='text'
                                 id="BurpeePaceInput"
                                 value={burpeePace}
-                                className='border rounded w-10 p-1 ml-2 text-center'
-                                onChange={(e) => {
-                                    if(isNaN(e.target.value)===true && Number(e.target.value)>=2 && Number(e.target.value)<=10) setBurpeePace(e.target.value);
-                                    else setBurpeePace("5.0");
-                                }}
+                                className='border border-gray-400 rounded w-10 p-1 ml-2 text-center'
+                                onChange={(e) => setBurpeePace(e.target.value)}
                             />
                         </div>
                     </div>
                 )}
                 {(kind==="run") &&(
                     <div>
-                        <input
-                            onChange={(e) => setRunPaceM(e.target.value)}
-                            value={runPaceM}
-                            type='number'
-                            placeholder='ペース（分）'
-                            className='border border-gray-400 rounded p-1'
-                        />PM
-                        <input
-                            onChange={(e) => setRunPaceS(e.target.value)}
-                            value={runPaceS}
-                            type='number'
-                            placeholder='ペース（秒）'
-                            className='border border-gray-400 rounded p-1'
-                        />PS
+                        <div className='mt-2'>
+                            ペース M:S
+                            <select
+                                onChange={(e) => setRunPaceM(e.target.value)}
+                                className='border border-gray-400 rounded p-1 ml-1'
+                            >
+                                {optionReturn(59)}
+                            </select>:
+                            <select
+                                onChange={(e) => setRunPaceS(e.target.value)}
+                                className='border  border-gray-400 rounded p-1'
+                            >
+                                {optionReturn(59)}
+                            </select>
+                        </div>
                         <label htmlFor='runLengthInput'>距離</label>
                         <input
                             onChange={(e) => setRunLength(e.target.value)}
@@ -119,38 +137,40 @@ const AddModular = (props) => {
                             value={runLength}
                             type='number'
                             placeholder='距離'
-                            className='border border-gray-400 rounded w-16 p-1'
+                            className='border border-gray-400 rounded w-16 p-1 m-2'
                         />Km
                     </div>
                 )}
                 {(kind==="study") &&(
                     <div>
-                        <input
-                            onChange={(e) => setStudyH(e.target.value)}
-                            value={studyH}
-                            type='number'
-                            placeholder='勉強時間(時)'
-                            className='border border-gray-400 rounded p-1'
-                        />H
-                        <input
-                            onChange={(e) => setStudyM(e.target.value)}
-                            value={studyM}
-                            type='number'
-                            placeholder='勉強時間(分)'
-                            className='border border-gray-400 rounded p-1'
-                        />M
+                        <div className='mt-2'>
+                            時間 H:M
+                            <select
+                                onChange={(e) => setStudyH(e.target.value)}
+                                className='border border-gray-400 rounded p-1 ml-1'
+                            >
+                                {optionReturn(24)}
+                            </select>:
+                            <select
+                                onChange={(e) => setStudyM(e.target.value)}
+                                className='border border-gray-400 rounded p-1'
+                            >
+                                {optionReturn(59)}
+                            </select>
+                        </div>
                         <input
                             onChange={(e) => setStudySubject(e.target.value)}
                             value={studySubject}
                             type='text'
                             placeholder='科目'
-                            className='border border-gray-400 rounded p-1'
-                        />H
+                            className='border border-gray-400 rounded p-1 m-2'
+                        />
                     </div>
                 )}
                 <button
                     className='p-2 rounded
                     text-white duration-200 bg-blue-600 hover:bg-blue-400'
+                    onClick={() => pushAdd()}
                 >
                     データを追加
                 </button>
