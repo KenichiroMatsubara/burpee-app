@@ -12,18 +12,18 @@ const AddModular = (props) => {
     const [burpeeM,setBurpeeM] = useState(0);
     const [burpeePace,setBurpeePace] = useState("5.0");
 
-    const [runPaceM,setRunPaceM] = useState();
-    const [runPaceS,setRunPaceS] = useState();
-    const [runLength,setRunLength] = useState();
+    const [runPaceM,setRunPaceM] = useState(5);
+    const [runPaceS,setRunPaceS] = useState(0);
+    const [runLength,setRunLength] = useState(0);
 
-    const [studyH,setStudyH] = useState();
-    const [studyM,setStudyM] = useState();
+    const [studyH,setStudyH] = useState(0);
+    const [studyM,setStudyM] = useState(0);
     const [studySubject,setStudySubject] = useState("");
 
 
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
-    const training = useSelector((state) => state.data.training);
+    const trainingM = useSelector((state) => state.data.training);
     const modularNumber = useSelector((state) => state.data.modularNumber)
 
     const [kind ,setKind] = useState("burpee");
@@ -34,29 +34,42 @@ const AddModular = (props) => {
     }
 
     const pushAdd = () => {
-        closeAddModular();
         const newData = {};
         newData.year=year;
         newData.month=month;
         newData.date=modularNumber;
         newData.kind=kind;
         if(newData.kind==="burpee"){
+            if(burpeeH===0 || burpeeM===0 || isNaN(burpeePace)===true|| (Number(burpeePace)<2 && 10<Number(burpeePace))){
+                window.alert("入力されている数値は無効です");
+                return;
+            }
             newData.h=burpeeH;
             newData.m=burpeeM;
             newData.pace=burpeePace;
         }
         else if(newData.kind==="run"){
+            if(runPaceM===0 || runLength===0){
+                window.alert("入力されている数値は無効です");
+                return;
+            }
             newData.paceM=runPaceM;
             newData.paceS=runPaceS;
             newData.length=runLength;
         }
         else if(newData.kind==="study"){
+            if(studyH+studyM===0){
+                //studyH+studyM===0はどっちも正なのでstudyH===0 && stydyM===0と等価
+                window.alert("入力されている数値は無効です");
+                return;
+            }
             newData.h=studyH;
             newData.m=studyM;
             newData.subject=studySubject;
         }
         usedispatch(addTraining(newData));
-        console.log(training);
+        console.log(trainingM);
+        closeAddModular();
         return;
     }
 
@@ -95,6 +108,7 @@ const AddModular = (props) => {
                 <select
                     onChange={(e) => setKind(e.target.value)}
                     className='border border-gray-400 rounded p-1'
+                    value={kind}
                 >
                     {kinds.map((data,index) => {
                         return <option
@@ -125,7 +139,7 @@ const AddModular = (props) => {
                         <div className='m-2'>
                             <label htmlFor='BurpeePaceInput'>ペース</label>
                             <input
-                                type='text'
+                                type='number'
                                 id="BurpeePaceInput"
                                 value={burpeePace}
                                 className='border border-gray-400 rounded w-10 p-1 ml-2 text-center'
@@ -141,12 +155,14 @@ const AddModular = (props) => {
                             <select
                                 onChange={(e) => setRunPaceM(e.target.value)}
                                 className='border border-gray-400 rounded p-1 ml-1'
+                                value={runPaceM}
                             >
-                                {optionReturn(59)}
+                                {optionReturn(10)}
                             </select>:
                             <select
                                 onChange={(e) => setRunPaceS(e.target.value)}
                                 className='border  border-gray-400 rounded p-1'
+                                value={runPaceS}
                             >
                                 {optionReturn(59)}
                             </select>
@@ -169,12 +185,14 @@ const AddModular = (props) => {
                             <select
                                 onChange={(e) => setStudyH(e.target.value)}
                                 className='border border-gray-400 rounded p-1 ml-1'
+                                value={studyH}
                             >
                                 {optionReturn(24)}
                             </select>:
                             <select
                                 onChange={(e) => setStudyM(e.target.value)}
                                 className='border border-gray-400 rounded p-1'
+                                value={studyM}
                             >
                                 {optionReturn(59)}
                             </select>

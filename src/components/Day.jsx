@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModularNumber, setOnModular } from '../features/dataReducer';
 import Modular from './Modular';
 
 export const Day = (props) => {
-    const { day, rowIdx, training } = props;
+    const { day, rowIdx, trainingD } = props;
     const dispatch = useDispatch();
 
     const [onBurpeedMark, setOnBurpeedMark] = useState(false);
@@ -18,7 +18,7 @@ export const Day = (props) => {
     const onModular = useSelector((state) => state.data.onModular);
 
     const getCurrentDayClass = (i) => {
-        if(i==1){
+        if(i===1){
             let dayClass = "text-sm p-1 my-1 text-center";
             if(rowIdx===0 && Number(day.format("DD"))>10){
                 dayClass+=" text-gray-400";
@@ -31,7 +31,7 @@ export const Day = (props) => {
             }
             return dayClass;
         }
-        else if(i==2){
+        else if(i===2){
             let dayClass="border border-gray-300 flex flex-col cursor-pointer";
             if(rowIdx===0 && Number(day.format("DD"))>10){
             }
@@ -45,21 +45,26 @@ export const Day = (props) => {
     }
 
     const getTraining = () => {
-        for(let i=0;i<training.length;i++){
-            if(training[i]!==Number(day.format("YY"))){
-                ;
+        trainingD.map((data,index) => {
+            if(data.year === Number(day.format("YYYY"))){
+                dayTrainingData.push(data);
+                if(data.kind==="burpee"){
+                    setOnBurpeedMark(true);
+                }
+                else if(data.kind==="run"){
+                    setOnRunMark(true);
+                }
+                else if(data.kind==="study"){
+                    setOnStudiedMark(true);
+                }
             }
-            else if(training[i].kind=="burpee"){
-                setOnBurpeedMark(true);
-            }
-            else if(training[i].kind=="run"){
-                setOnRunMark(true);
-            }
-            else if(training[i].kind=="study"){
-                setOnStudiedMark(true);
-            }
-        }
+            setOnBurpeedMark(true);
+        })
     }
+
+    useEffect(()=>{
+        getTraining();
+    },[trainingD]);
 
     const clickDay = () => {
         if(onModular==true) return;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Day } from "./Day";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Modular from './Modular';
 import DataModular from './DataModular';
 import AddModular from './AddModular';
@@ -11,8 +11,7 @@ export const Month = (props) => {
     const onModular = useSelector((state) => state.data.onModular);
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
-    const training = useSelector((state) => state.data.training);
-    const dispatch = useDispatch();
+    const trainingM = useSelector((state) => state.data.training[Number(month[1][1].format("MM"))]);
 
 
     const xDay = ["Sum","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -52,7 +51,7 @@ export const Month = (props) => {
                                 day={day}
                                 key={idx}
                                 rowIdx={i}
-                                training={training[Number(day.format("MM"))][Number(day.format("DD"))]}
+                                trainingD={trainingM[Number(day.format("DD"))]}
                             />
                         ))}
                     </React.Fragment>
