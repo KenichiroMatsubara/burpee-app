@@ -1,18 +1,20 @@
+const ARRAY=[];
+for(let i=0;i<=31;i++) ARRAY.push([]);
 export const trainingData = [
     [],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-    [new Array(32)],
-]
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+    ARRAY,
+];
 const sample1 = {
     year: 2024,
     month: 2,
@@ -27,8 +29,8 @@ const sample2 = {
     month: 2,
     date: 3,
     kind: "run",
-    pace_m: 5,
-    pace_s: 30,
+    paceM: 5,
+    paceS: 30,
     length: 10,
 }
 const sample3 = {

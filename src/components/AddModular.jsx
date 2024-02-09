@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setOnAddModular, setOnModular } from '../features/dataReducer';
+import { addTraining, setOnAddModular, setOnModular } from '../features/dataReducer';
 import { IoIosClose } from "react-icons/io";
 
 
@@ -23,10 +23,10 @@ const AddModular = (props) => {
 
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
+    const training = useSelector((state) => state.data.training);
     const modularNumber = useSelector((state) => state.data.modularNumber)
 
     const [kind ,setKind] = useState("burpee");
-
     const kinds=["burpee", "run", "study"];
 
     const closeAddModular = () => {
@@ -35,7 +35,28 @@ const AddModular = (props) => {
 
     const pushAdd = () => {
         closeAddModular();
-        const addData = {};
+        const newData = {};
+        newData.year=year;
+        newData.month=month;
+        newData.date=modularNumber;
+        newData.kind=kind;
+        if(newData.kind==="burpee"){
+            newData.h=burpeeH;
+            newData.m=burpeeM;
+            newData.pace=burpeePace;
+        }
+        else if(newData.kind==="run"){
+            newData.paceM=runPaceM;
+            newData.paceS=runPaceS;
+            newData.length=runLength;
+        }
+        else if(newData.kind==="study"){
+            newData.h=studyH;
+            newData.m=studyM;
+            newData.subject=studySubject;
+        }
+        usedispatch(addTraining(newData));
+        console.log(training);
         return;
     }
 

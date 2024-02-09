@@ -30,8 +30,8 @@ export const dataSlice = createSlice({
             state.onDataModular = action.payload;
         },
 
-        addTraining: (state, action1 ,action2, action3) => {
-            state.training[action1.payload][action2.payload].push(action3.payload);
+        addTraining: (state,action) => {
+            state.training[action.payload.month][action.payload.date].push(action.payload);
         },
     }
 })
