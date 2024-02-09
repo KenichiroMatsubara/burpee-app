@@ -8,9 +8,9 @@ const AddModular = (props) => {
     const { year, month } = props;
     const usedispatch = useDispatch();
 
-    const [burpeeH,setBurpeeH] = useState();
-    const [burpeeM,setBurpeeM] = useState();
-    const [burpeePace,setBurpeePace] = useState();
+    const Hour=[];
+    const [burpeeTime,setBurpeeTime] = useState("00:00");
+    const [burpeePace,setBurpeePace] = useState("5.0");
 
     const [runPaceM,setRunPaceM] = useState();
     const [runPaceS,setRunPaceS] = useState();
@@ -68,32 +68,35 @@ const AddModular = (props) => {
                             >{data}</option>
                     })}
                 </select>
-                {(kind=="burpee") &&(
-                    <div>
-                        <input
-                            onChange={(e) => setBurpeeH(e.target.value)}
-                            value={burpeeH}
-                            type='number'
-                            placeholder='バーピー時間（時）'
-                            className='border border-gray-400 rounded p-1'
-                        />H
-                        <input
-                            onChange={(e) => setBurpeeM(Math.min(e.target.value,59))}
-                            value={burpeeM}
-                            type='number'
-                            placeholder='バーピー時間（分）'
-                            className='border border-gray-400 rounded p-1'
-                        />M
-                        <input
-                            onChange={(e) => setBurpeePace(e.target.value)}
-                            value={burpeePace}
-                            type='number'
-                            placeholder='何秒に1回'
-                            className='border border-gray-400 rounded p-1'
-                        />P
+                {(kind==="burpee") &&(
+                    <div className=''>
+                        <div className=''>
+                            <label htmlFor='BurpeeTimeInput'>時間(H:S):</label>
+                            <input
+                                type='time'
+                                id="BurpeeTimeInput"
+                                value={burpeeTime}
+                                className='text-lg border rounded'
+                                onChange={(e) => setBurpeeTime(e.target.value)}
+                            />
+                        </div>
+
+                        <div className='m-2'>
+                            <label htmlFor='BurpeePaceInput'>ペース</label>
+                            <input
+                                type='text'
+                                id="BurpeePaceInput"
+                                value={burpeePace}
+                                className='border rounded w-10 p-1 ml-2 text-center'
+                                onChange={(e) => {
+                                    if(isNaN(e.target.value)===true && Number(e.target.value)>=2 && Number(e.target.value)<=10) setBurpeePace(e.target.value);
+                                    else setBurpeePace("5.0");
+                                }}
+                            />
+                        </div>
                     </div>
                 )}
-                {(kind=="run") &&(
+                {(kind==="run") &&(
                     <div>
                         <input
                             onChange={(e) => setRunPaceM(e.target.value)}
@@ -109,16 +112,18 @@ const AddModular = (props) => {
                             placeholder='ペース（秒）'
                             className='border border-gray-400 rounded p-1'
                         />PS
+                        <label htmlFor='runLengthInput'>距離</label>
                         <input
                             onChange={(e) => setRunLength(e.target.value)}
+                            id='runLengthInput'
                             value={runLength}
                             type='number'
                             placeholder='距離'
-                            className='border border-gray-400 rounded p-1'
-                        />Ln
+                            className='border border-gray-400 rounded w-16 p-1'
+                        />Km
                     </div>
                 )}
-                {(kind=="study") &&(
+                {(kind==="study") &&(
                     <div>
                         <input
                             onChange={(e) => setStudyH(e.target.value)}
@@ -143,6 +148,12 @@ const AddModular = (props) => {
                         />H
                     </div>
                 )}
+                <button
+                    className='p-2 rounded
+                    text-white duration-200 bg-blue-600 hover:bg-blue-400'
+                >
+                    データを追加
+                </button>
             </div>
         </div>
     )
