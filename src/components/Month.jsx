@@ -12,6 +12,7 @@ export const Month = (props) => {
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
     const trainingM = useSelector((state) => state.data.training[Number(month[1][1].format("MM"))]);
+    const modularNumber = useSelector((state) => state.data.modularNumber);
 
 
     const xDay = ["Sum","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -25,8 +26,12 @@ export const Month = (props) => {
             )}
 
             {onDataModular &&(
-                <div className=' absolute top-0 right-0 left-0 bottom-0 m-auto mt-8'>
-                    <DataModular year={Number(month[1][1].format("YYYY"))} month={Number(month[1][1].format("MM"))} />
+                <div className=' absolute top-0 right-0 left-0 bottom-0 m-auto -ml-5 mt-8'>
+                    <DataModular
+                        year={Number(month[1][1].format("YYYY"))}
+                        month={Number(month[1][1].format("MM"))}
+                        trainingD={trainingM[modularNumber]}
+                    />
                 </div>
             )}
 

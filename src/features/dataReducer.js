@@ -33,8 +33,12 @@ export const dataSlice = createSlice({
         addTraining: (state,action) => {
             state.training[action.payload.month][action.payload.date].push(action.payload);
         },
+
+        deleteTraining: (state,action) => {
+            state.training[action.payload.month][action.payload.date].splice(action.payload.pos,1);
+        },
     }
 })
 
 export default dataSlice.reducer;
-export const {changeMode, setOnModular, setModularNumber, setOnAddModular, setOnDataModular, addTraining} = dataSlice.actions;
+export const {changeMode, setOnModular, setModularNumber, setOnAddModular, setOnDataModular, addTraining ,deleteTraining} = dataSlice.actions;

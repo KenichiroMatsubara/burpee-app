@@ -21,9 +21,6 @@ const AddModular = (props) => {
     const [studySubject,setStudySubject] = useState("");
 
 
-    const onDataModular = useSelector((state) => state.data.onDataModular)
-    const onAddModular = useSelector((state) => state.data.onAddModular)
-    const trainingM = useSelector((state) => state.data.training);
     const modularNumber = useSelector((state) => state.data.modularNumber)
 
     const [kind ,setKind] = useState("burpee");
@@ -40,7 +37,7 @@ const AddModular = (props) => {
         newData.date=modularNumber;
         newData.kind=kind;
         if(newData.kind==="burpee"){
-            if(burpeeH===0 || burpeeM===0 || isNaN(burpeePace)===true|| (Number(burpeePace)<2 && 10<Number(burpeePace))){
+            if(burpeeH+burpeeM===0 || isNaN(burpeePace)===true|| Number(burpeePace)<2 || 10<Number(burpeePace)){
                 window.alert("入力されている数値は無効です");
                 return;
             }
@@ -68,7 +65,6 @@ const AddModular = (props) => {
             newData.subject=studySubject;
         }
         usedispatch(addTraining(newData));
-        console.log(trainingM);
         closeAddModular();
         return;
     }

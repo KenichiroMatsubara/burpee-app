@@ -12,8 +12,6 @@ export const Day = (props) => {
     const [onRunMark, setOnRunMark] = useState(false);
     const [onStudiedMark, setOnStudiedMark] = useState(false);
 
-    const [dayTrainingData, setDayTrainingData] = useState([]);
-
     //モジュラー関係
     const onModular = useSelector((state) => state.data.onModular);
 
@@ -47,7 +45,6 @@ export const Day = (props) => {
     const getTraining = () => {
         trainingD.map((data,index) => {
             if(data.year === Number(day.format("YYYY"))){
-                dayTrainingData.push(data);
                 if(data.kind==="burpee"){
                     setOnBurpeedMark(true);
                 }
@@ -84,13 +81,13 @@ export const Day = (props) => {
                     {Number(day.format("DD"))}
                 </p>
             </header>
-            <div className={onBurpeedMark ? 'bg-green-600 h-2 border':'h-2'}>
+            <div className={onBurpeedMark ? 'bg-green-600 h-2 border border-black':'h-2'}>
                 　
             </div>
-            <div className={onRunMark ? 'bg-red-600 h-2 border':'h-2'}>
+            <div className={onRunMark ? 'bg-red-600 h-2 border border-black':'h-2'}>
                 　
             </div>
-            <div className={onStudiedMark ? 'bg-blue-600 h-2 border':'h-2'}>
+            <div className={onStudiedMark ? 'bg-blue-600 h-2 border border-black':'h-2'}>
                 　
             </div>
         </div>
