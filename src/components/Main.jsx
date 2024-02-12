@@ -11,7 +11,7 @@ export const Main = () => {
             className='h-screen flex flex-1 flex-col'
         >
             <CalendarHeader />
-            <div className='flex flex-1'>
+            <div className='flex flex-1 max-w-lg'>
                 <Month month={currentMonth} />
             </div>
         </div>

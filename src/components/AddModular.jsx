@@ -142,7 +142,7 @@ const AddModular = (props) => {
                                 id="BurpeePaceInput"
                                 value={burpeePace}
                                 className='border border-gray-400 rounded w-10 p-1 ml-2 text-center'
-                                onChange={(e) => setBurpeePace(Number(e.target.value))}
+                                onChange={(e) => setBurpeePace(e.target.value)}
                             />
                         </div>
                     </div>
@@ -168,7 +168,7 @@ const AddModular = (props) => {
                         </div>
                         <label htmlFor='runLengthInput'>距離</label>
                         <input
-                            onChange={(e) => setRunLength(Number(e.target.value))}
+                            onChange={(e) => setRunLength(e.target.value)}
                             id='runLengthInput'
                             value={runLength}
                             type='number'
