@@ -5,7 +5,7 @@ import { setModularNumber, setOnModular } from '../features/dataReducer';
 import Modular from './Modular';
 
 export const Day = (props) => {
-    const { day, rowIdx, trainingD } = props;
+    const { day, rowIdx } = props;
     const dispatch = useDispatch();
 
     const [onBurpeedMark, setOnBurpeedMark] = useState(false);
@@ -14,6 +14,7 @@ export const Day = (props) => {
 
     //モジュラー関係
     const onModular = useSelector((state) => state.data.onModular);
+    const trainingD = useSelector((state) => state.data.training[Number(day.format("MM"))][Number(day.format("DD"))])
 
     const getCurrentDayClass = (i) => {
         if(i===1){
@@ -43,6 +44,9 @@ export const Day = (props) => {
     }
 
     const getTraining = () => {
+        setOnBurpeedMark(false);
+        setOnRunMark(false);
+        setOnStudiedMark(false);
         trainingD.map((data,index) => {
             if(data.year === Number(day.format("YYYY"))){
                 if(data.kind==="burpee"){
@@ -55,12 +59,12 @@ export const Day = (props) => {
                     setOnStudiedMark(true);
                 }
             }
-            setOnBurpeedMark(true);
         })
     }
 
     useEffect(()=>{
         getTraining();
+        console.log(trainingD);
     },[trainingD]);
 
     const clickDay = () => {

@@ -30,7 +30,6 @@ export const Month = (props) => {
                     <DataModular
                         year={Number(month[1][1].format("YYYY"))}
                         month={Number(month[1][1].format("MM"))}
-                        trainingD={trainingM[modularNumber]}
                     />
                 </div>
             )}
@@ -56,7 +55,6 @@ export const Month = (props) => {
                                 day={day}
                                 key={idx}
                                 rowIdx={i}
-                                trainingD={trainingM[Number(day.format("DD"))]}
                             />
                         ))}
                     </React.Fragment>

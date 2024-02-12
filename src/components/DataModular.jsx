@@ -4,11 +4,11 @@ import { deleteTraining, setOnDataModular, setOnModular } from '../features/data
 import { IoIosClose } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
-
 const DataList = (props) => {
-    const {year,month,trainingD}=props;
+    const {year,month}=props;
 
     const modularNumber=useSelector((state) => state.data.modularNumber);
+    const trainingD=useSelector((state) => state.data.training[month][modularNumber]);
 
     const usedispatch = useDispatch();
 
@@ -22,11 +22,16 @@ const DataList = (props) => {
     }
 
 
-    if(trainingD.length===0){
-        return <><p />データなし</>;
-    }
-
-    return <>
+    return (<>
+    <button onClick={() =>{
+        console.log("month");
+        console.log(month);
+        console.log("modularNumber");
+        console.log(modularNumber);
+        console.log("trainingD");
+        console.log(trainingD);
+    }}>デバッグ</button>
+    {trainingD.length===0 && <><p />データなし</>}
     {trainingD.map((data,index) => {
         if(data.kind==="burpee"){
             return (<div className='border border-gray-400 mx-2 my-1 flex items-center'>
@@ -56,16 +61,17 @@ const DataList = (props) => {
             </div>);
         }
     })}
-    </>;
+    </>);
 }
 
 
 
 const DataModular = (props) => {
-    const {year,month,trainingD}=props;
+    const {year,month}=props;
     const usedispatch = useDispatch();
 
     const modularNumber = useSelector((state) => state.data.modularNumber)
+    const trainingD = useSelector((state) => state.data.training[month][modularNumber]);
 
     const closeDataModular = () => {
         usedispatch(setOnDataModular(false));
