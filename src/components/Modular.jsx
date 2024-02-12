@@ -92,8 +92,6 @@ const Modular = (props) => {
                     <p className='text-xs'>メモ</p>
                 </div>
             </div>
-            <div>
-            </div>
         </div>
     )
 }

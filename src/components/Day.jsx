@@ -64,7 +64,6 @@ export const Day = (props) => {
 
     useEffect(()=>{
         getTraining();
-        console.log(trainingD);
     },[trainingD]);
 
     const clickDay = () => {
@@ -85,13 +84,13 @@ export const Day = (props) => {
                     {Number(day.format("DD"))}
                 </p>
             </header>
-            <div className={onBurpeedMark ? 'bg-green-600 h-2 border border-black':'h-2'}>
+            <div className={onBurpeedMark ? 'bg-green-600 h-2 border':'h-2'}>
                 　
             </div>
-            <div className={onRunMark ? 'bg-red-600 h-2 border border-black':'h-2'}>
+            <div className={onRunMark ? 'bg-red-600 h-2 border':'h-2'}>
                 　
             </div>
-            <div className={onStudiedMark ? 'bg-blue-600 h-2 border border-black':'h-2'}>
+            <div className={onStudiedMark ? 'bg-blue-600 h-2 border':'h-2'}>
                 　
             </div>
         </div>

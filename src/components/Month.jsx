@@ -11,8 +11,6 @@ export const Month = (props) => {
     const onModular = useSelector((state) => state.data.onModular);
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
-    const trainingM = useSelector((state) => state.data.training[Number(month[1][1].format("MM"))]);
-    const modularNumber = useSelector((state) => state.data.modularNumber);
 
 
     const xDay = ["Sum","Mon","Tue","Wed","Thu","Fri","Sat"];

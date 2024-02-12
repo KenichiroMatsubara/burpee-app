@@ -23,40 +23,32 @@ const DataList = (props) => {
 
 
     return (<>
-    <button onClick={() =>{
-        console.log("month");
-        console.log(month);
-        console.log("modularNumber");
-        console.log(modularNumber);
-        console.log("trainingD");
-        console.log(trainingD);
-    }}>デバッグ</button>
     {trainingD.length===0 && <><p />データなし</>}
     {trainingD.map((data,index) => {
         if(data.kind==="burpee"){
-            return (<div className='border border-gray-400 mx-2 my-1 flex items-center'>
+            return (<div className='border border-gray-400 mx-2 my-1 flex items-center' key={Math.random()}>
                 <div className='ml-2'>{data.kind}:　{data.h}H {data.m}M　{data.pace}pace</div>
                 <MdDelete
                     className='ml-auto mr-2 cursor-pointer hover:text-gray-500'
-                    onClick={deleteData(index)}
+                    onClick={(e) => {e.stopPropagation();deleteData(index);}}
                 />
             </div>);
         }
         else if(data.kind==="run"){
-            return (<div className='border border-gray-400 mx-2 my-1 flex items-center'>
+            return (<div className='border border-gray-400 mx-2 my-1 flex items-center' key={Math.random()}>
                 <div className='ml-2'>{data.kind}:　pace {data.paceM}M {data.paceS}S　{data.length}km</div>
                 <MdDelete
                     className='ml-auto mr-2 cursor-pointer hover:text-gray-500'
-                    onClick={deleteData(index)}
+                    onClick={(e) => {e.stopPropagation();deleteData(index);}}
                 />
             </div>);
         }
         else if(data.kind==="study"){
-            return (<div className='border border-gray-400 mx-2 my-1 flex items-center'>
+            return (<div className='border border-gray-400 mx-2 my-1 flex items-center' key={Math.random()}>
                 <div className='ml-2'>{data.kind}:　{data.subject.trim()==="" ? "科目なし":data.subject}　{data.h}H {data.m}M</div>
                 <MdDelete
                     className='ml-auto mr-2 cursor-pointer hover:text-gray-500'
-                    onClick={deleteData(index)}
+                    onClick={(e) => {e.stopPropagation();deleteData(index);}}
                 />
             </div>);
         }

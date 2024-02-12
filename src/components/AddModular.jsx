@@ -10,7 +10,7 @@ const AddModular = (props) => {
 
     const [burpeeH,setBurpeeH] = useState(0);
     const [burpeeM,setBurpeeM] = useState(0);
-    const [burpeePace,setBurpeePace] = useState("5.0");
+    const [burpeePace,setBurpeePace] = useState(5);
 
     const [runPaceM,setRunPaceM] = useState(5);
     const [runPaceS,setRunPaceS] = useState(0);
@@ -21,7 +21,7 @@ const AddModular = (props) => {
     const [studySubject,setStudySubject] = useState("");
 
 
-    const modularNumber = useSelector((state) => state.data.modularNumber)
+    const modularNumber = useSelector((state) => state.data.modularNumber);
 
     const [kind ,setKind] = useState("burpee");
     const kinds=["burpee", "run", "study"];
@@ -41,18 +41,18 @@ const AddModular = (props) => {
                 window.alert("入力されている数値は無効です");
                 return;
             }
-            newData.h=burpeeH;
-            newData.m=burpeeM;
-            newData.pace=burpeePace;
+            newData.h=Number(burpeeH);
+            newData.m=Number(burpeeM);
+            newData.pace=Number(burpeePace);
         }
         else if(newData.kind==="run"){
             if(runPaceM===0 || runLength===0){
                 window.alert("入力されている数値は無効です");
                 return;
             }
-            newData.paceM=runPaceM;
-            newData.paceS=runPaceS;
-            newData.length=runLength;
+            newData.paceM=Number(runPaceM);
+            newData.paceS=Number(runPaceS);
+            newData.length=Number(runLength);
         }
         else if(newData.kind==="study"){
             if(studyH+studyM===0){
@@ -60,8 +60,8 @@ const AddModular = (props) => {
                 window.alert("入力されている数値は無効です");
                 return;
             }
-            newData.h=studyH;
-            newData.m=studyM;
+            newData.h=Number(studyH);
+            newData.m=Number(studyM);
             newData.subject=studySubject;
         }
         usedispatch(addTraining(newData));
@@ -74,7 +74,7 @@ const AddModular = (props) => {
         for(let i=0;i<=max;i++) ARRAY.push(i);
         return (<>
             {ARRAY.map((data) => {
-                return <option value={data}>{data}</option>
+                return <option value={data} key={Math.random()}>{data}</option>
             })}
         </>)
     }
@@ -109,6 +109,7 @@ const AddModular = (props) => {
                     {kinds.map((data,index) => {
                         return <option
                             value={data}
+                            key={Math.random()}
                             >{data}</option>
                     })}
                 </select>
@@ -121,12 +122,14 @@ const AddModular = (props) => {
                             <select
                                 onChange={(e) => setBurpeeH(e.target.value)}
                                 className='border border-gray-400 rounded ml-2 p-1'
+                                value={burpeeH}
                             >
                                 {optionReturn(24)}
                             </select>:
                             <select
                                 onChange={(e) => setBurpeeM(e.target.value)}
                                 className='border border-gray-400 rounded p-1'
+                                value={burpeeM}
                             >
                                 {optionReturn(59)}
                             </select>
@@ -139,7 +142,7 @@ const AddModular = (props) => {
                                 id="BurpeePaceInput"
                                 value={burpeePace}
                                 className='border border-gray-400 rounded w-10 p-1 ml-2 text-center'
-                                onChange={(e) => setBurpeePace(e.target.value)}
+                                onChange={(e) => setBurpeePace(Number(e.target.value))}
                             />
                         </div>
                     </div>
@@ -165,7 +168,7 @@ const AddModular = (props) => {
                         </div>
                         <label htmlFor='runLengthInput'>距離</label>
                         <input
-                            onChange={(e) => setRunLength(e.target.value)}
+                            onChange={(e) => setRunLength(Number(e.target.value))}
                             id='runLengthInput'
                             value={runLength}
                             type='number'
