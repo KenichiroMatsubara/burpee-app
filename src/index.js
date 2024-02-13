@@ -6,10 +6,12 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import dataReducer from './features/dataReducer';
+import userReducer from './features/userReducer';
 
 const Store = configureStore({
     reducer: {
         data: dataReducer,
+        user: userReducer,
     }
 });
 
