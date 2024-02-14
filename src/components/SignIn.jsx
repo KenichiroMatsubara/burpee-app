@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { auth, provider } from '../firebase'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
+import { IoIosLogIn } from "react-icons/io";
+import { setOnLogOut } from '../features/dataReducer';
 
 
 export const SignIn = () => {
     const usedispatch = useDispatch();
     useEffect(() => {
-        
+
     },[]);
     const signIn = () => {
         signInWithPopup(auth,provider).then((result) => {
@@ -27,12 +29,25 @@ export const SignIn = () => {
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-        })
+        });
+        usedispatch(setOnLogOut(false));
     }
 
     return (
-        <div>
-            <button onClick={() => signIn()}>ログイン</button>
+        <div
+            onClick={() => signIn()}
+            className='
+            text-center
+            w-52 rounded-3xl p-5
+            mx-auto mt-10
+            cursor-pointer hover:bg-blue-500 duration-500
+            bg-blue-700 text-white
+            '
+        >
+            <IoIosLogIn
+                className='ml-auto mr-auto text-9xl'
+            />
+            <p className='text-2xl'>ログイン</p>
         </div>
     )
 }
