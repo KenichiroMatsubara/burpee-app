@@ -14,7 +14,7 @@ export const Day = (props) => {
 
     //モジュラー関係
     const onModular = useSelector((state) => state.data.onModular);
-    const trainingD = useSelector((state) => state.data.training[Number(day.format("MM"))][Number(day.format("DD"))])
+    const trainingD = useSelector((state) => state.data.training[Number(day.format("DD"))])
 
     const getCurrentDayClass = (i) => {
         if(i===1){

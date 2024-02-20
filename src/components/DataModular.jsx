@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTraining, setOnDataModular, setOnModular } from '../features/dataReducer';
+import { deleteTraining, setOnDataModular, setOnModular, setTraining } from '../features/dataReducer';
 import { IoIosClose } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
@@ -8,17 +8,16 @@ const DataList = (props) => {
     const {year,month}=props;
 
     const modularNumber=useSelector((state) => state.data.modularNumber);
-    const trainingD=useSelector((state) => state.data.training[month][modularNumber]);
+    const training=useSelector((state) => state.data.training);
+    const trainingD = training[modularNumber];
 
     const usedispatch = useDispatch();
 
+
     const deleteData = (pos) => {
-        const monthDatePos = {
-            month: month,
-            date: modularNumber,
-            pos: pos
-        };
-        usedispatch(deleteTraining(monthDatePos));
+        const newTraining = [...training];
+        newTraining[modularNumber]=[...newTraining[modularNumber]].splice(pos,1);
+        usedispatch(setTraining(newTraining));
     }
 
 

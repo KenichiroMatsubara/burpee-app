@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTraining, setOnAddModular, setOnModular } from '../features/dataReducer';
+import { addTraining, setOnAddModular, setOnModular, setTraining } from '../features/dataReducer';
 import { IoIosClose } from "react-icons/io";
 
 
@@ -22,6 +22,8 @@ const AddModular = (props) => {
 
 
     const modularNumber = useSelector((state) => state.data.modularNumber);
+    const training = useSelector((state) => state.data.training);
+
 
     const [kind ,setKind] = useState("burpee");
     const kinds=["burpee", "run", "study"];
@@ -64,7 +66,9 @@ const AddModular = (props) => {
             newData.m=Number(studyM);
             newData.subject=studySubject;
         }
-        usedispatch(addTraining(newData));
+        const newTraining = [...training];
+        newTraining[modularNumber]=[...newTraining[modularNumber],newData];
+        usedispatch(setTraining(newTraining));
         closeAddModular();
         return;
     }

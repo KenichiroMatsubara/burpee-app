@@ -1,20 +1,6 @@
-const ARRAY=[];
+const ARRAY = [];
 for(let i=0;i<=31;i++) ARRAY.push([]);
-export const trainingData = [
-    [],
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-    ARRAY,
-];
+export const trainingData = ARRAY;
 const sample1 = {
     year: 2024,
     month: 2,
