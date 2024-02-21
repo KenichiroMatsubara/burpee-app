@@ -3,13 +3,17 @@ import { getMonth } from "../util";
 import { CalendarHeader } from "./CalendarHeader";
 import { Month } from "./Month";
 import { SignIn } from "./SignIn";
+import { SignOut } from "./SignOut";
 import { auth, db } from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../features/userReducer';
 import { doc, getDoc,  setDoc, updateDoc } from 'firebase/firestore';
-import { setTraining } from '../features/dataReducer';
+import { setOnLogOut, setTraining } from '../features/dataReducer';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { Graph } from './Graph';
 
 export const Main = () => {
+    const [mode,setMode] = useState("calendar");
 
     const MonthStr = ["","Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
 
@@ -17,6 +21,14 @@ export const Main = () => {
     const user = useSelector((state) => state.user.user);
     const training = useSelector((state) => state.data.training)
     const monthIndex = useSelector((state) => state.data.monthIndex);
+    const onLogOut = useSelector((state) => state.data.onLogOut);
+    const onModular = useSelector((state) => state.data.onModular);
+
+
+    const pushHamburger = () => {
+        if(onModular==true) return;
+        usedispatch(setOnLogOut(true));
+    };
 
     useEffect(() => {
         auth.onAuthStateChanged((loginUser) => {
@@ -86,8 +98,41 @@ export const Main = () => {
         (<div
             className='h-screen flex flex-1 flex-col'
         >
-            <CalendarHeader />
-            <Month month={getMonth(monthIndex)} />
+            <div>
+                <button
+                    onClick={() => setMode("calendar")}
+                    className='m-2 p-2 bg-gray-800 text-white rounded hover:bg-gray-600'
+                >
+                    カレンダー
+                </button>
+                <button
+                    onClick={() => setMode("graph")}
+                    className='mt-2 p-2 bg-gray-800 text-white rounded hover:bg-gray-600'
+                >
+                    グラフ
+                </button>
+            </div>
+
+
+            <GiHamburgerMenu
+                className='absolute top-0 right-0 m-2 text-3xl'
+                onClick={() => pushHamburger()}
+            />
+            {onLogOut && (
+            <>
+                <SignOut />
+            </>)}
+
+            {mode==="calendar" &&
+            <>
+                <CalendarHeader />
+                <Month month={getMonth(monthIndex)} />
+            </>}
+            {mode==="graph" &&
+            <>
+                <Graph />
+            </>
+            }
         </div>)
         :
         (<div className='flex-1'>

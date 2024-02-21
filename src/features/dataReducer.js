@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 export const dataSlice = createSlice({
     name: "data",
     initialState: {
-        mode: "training",
         onModular: false,
         onAddModular: false,
         onDataModular: false,
@@ -15,10 +14,6 @@ export const dataSlice = createSlice({
         training: trainingData,
     },
     reducers: {
-        changeMode: (state, action) => {
-            state.mode = action.payload;
-        },
-
         setOnModular: (state, action) => {
             state.onModular=action.payload;
         },
@@ -47,4 +42,4 @@ export const dataSlice = createSlice({
 })
 
 export default dataSlice.reducer;
-export const {changeMode, setOnModular, setDayIndex, setOnAddModular, setOnDataModular, setMonthIndex, setTraining,setOnLogOut} = dataSlice.actions;
+export const { setOnModular, setDayIndex, setOnAddModular, setOnDataModular, setMonthIndex, setTraining,setOnLogOut} = dataSlice.actions;
