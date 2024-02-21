@@ -13,7 +13,7 @@ const Modular = (props) => {
 
     const onDataModular = useSelector((state) => state.data.onDataModular)
     const onAddModular = useSelector((state) => state.data.onAddModular)
-    const modularNumber = useSelector((state) => state.data.modularNumber)
+    const dayIndex = useSelector((state) => state.data.dayIndex)
 
     const closeModular = () => {
         usedispatch(setOnModular(false));
@@ -49,7 +49,7 @@ const Modular = (props) => {
                     onClick={() => closeModular()}
                 />
             </div>
-            {year}年{month}月{modularNumber}日
+            {year}年{month}月{dayIndex}日
             <div className='flex p-2'>
                 <div className='rounded-xl cursor-pointer hover:bg-gray-200
                     flex flex-col

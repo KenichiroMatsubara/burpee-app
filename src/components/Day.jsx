@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setModularNumber, setOnModular } from '../features/dataReducer';
+import { setDayIndex, setOnModular } from '../features/dataReducer';
 
 export const Day = (props) => {
     const { day, rowIdx } = props;
@@ -70,7 +70,7 @@ export const Day = (props) => {
         else if(rowIdx===0 && Number(day.format("DD")>10)) return;
         else if(rowIdx===4 && Number(day.format("DD"))<=20) return;
         dispatch(setOnModular(true));
-        dispatch(setModularNumber(Number(day.format("DD"))));
+        dispatch(setDayIndex(Number(day.format("DD"))));
     }
 
     return (

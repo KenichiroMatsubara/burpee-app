@@ -11,7 +11,7 @@ export const dataSlice = createSlice({
         onDataModular: false,
         onLogOut: false,
         monthIndex: dayjs().month(),
-        modularNumber: 0,
+        dayIndex: 0,
         training: trainingData,
     },
     reducers: {
@@ -22,8 +22,8 @@ export const dataSlice = createSlice({
         setOnModular: (state, action) => {
             state.onModular=action.payload;
         },
-        setModularNumber: (state,action) => {
-            state.modularNumber=action.payload;
+        setDayIndex: (state,action) => {
+            state.dayIndex=action.payload;
         },
 
         setOnAddModular: (state, action) => {
@@ -47,4 +47,4 @@ export const dataSlice = createSlice({
 })
 
 export default dataSlice.reducer;
-export const {changeMode, setOnModular, setModularNumber, setOnAddModular, setOnDataModular, setMonthIndex, setTraining,setOnLogOut} = dataSlice.actions;
+export const {changeMode, setOnModular, setDayIndex, setOnAddModular, setOnDataModular, setMonthIndex, setTraining,setOnLogOut} = dataSlice.actions;

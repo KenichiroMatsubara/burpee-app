@@ -7,18 +7,18 @@ import { MdDelete } from "react-icons/md";
 const DataList = (props) => {
     const {year,month}=props;
 
-    const modularNumber=useSelector((state) => state.data.modularNumber);
+    const dayIndex=useSelector((state) => state.data.dayIndex);
     const training=useSelector((state) => state.data.training);
-    const trainingD = training[modularNumber];
+    const trainingD = training[dayIndex];
 
     const usedispatch = useDispatch();
 
 
     const deleteData = (pos) => {
-        const deletedTraining = [...training[modularNumber]];
+        const deletedTraining = [...training[dayIndex]];
         deletedTraining.splice(pos,1);
         const newTraining = [...training];
-        newTraining[modularNumber]=deletedTraining;
+        newTraining[dayIndex]=deletedTraining;
         console.log(newTraining);
         usedispatch(setTraining(newTraining));
     }
@@ -64,8 +64,8 @@ const DataModular = (props) => {
     const {year,month}=props;
     const usedispatch = useDispatch();
 
-    const modularNumber = useSelector((state) => state.data.modularNumber)
-    const trainingD = useSelector((state) => state.data.training[month][modularNumber]);
+    const dayIndex = useSelector((state) => state.data.dayIndex)
+    const trainingD = useSelector((state) => state.data.training[month][dayIndex]);
 
     const closeDataModular = () => {
         usedispatch(setOnDataModular(false));
@@ -92,7 +92,7 @@ const DataModular = (props) => {
                     onClick={() => closeDataModular()}
                 />
             </div>
-            {year}年{month}月{modularNumber}日
+            {year}年{month}月{dayIndex}日
             {/* ここからデータの詳細 */}
             <DataList year={year} month={month} trainingD={trainingD} />
         </div>

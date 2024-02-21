@@ -21,7 +21,7 @@ const AddModular = (props) => {
     const [studySubject,setStudySubject] = useState("");
 
 
-    const modularNumber = useSelector((state) => state.data.modularNumber);
+    const dayIndex = useSelector((state) => state.data.dayIndex);
     const training = useSelector((state) => state.data.training);
 
 
@@ -36,7 +36,7 @@ const AddModular = (props) => {
         const newData = {};
         newData.year=year;
         newData.month=month;
-        newData.date=modularNumber;
+        newData.date=dayIndex;
         newData.kind=kind;
         if(newData.kind==="burpee"){
             if(burpeeH+burpeeM===0 || isNaN(burpeePace)===true|| Number(burpeePace)<2 || 10<Number(burpeePace)){
@@ -67,7 +67,7 @@ const AddModular = (props) => {
             newData.subject=studySubject;
         }
         const newTraining = [...training];
-        newTraining[modularNumber]=[...newTraining[modularNumber],newData];
+        newTraining[dayIndex]=[...newTraining[dayIndex],newData];
         usedispatch(setTraining(newTraining));
         closeAddModular();
         return;
@@ -103,7 +103,7 @@ const AddModular = (props) => {
                     onClick={() => closeAddModular()}
                 />
             </div>
-            {year}年{month}月{modularNumber}日
+            {year}年{month}月{dayIndex}日
             <div>
                 <select
                     onChange={(e) => setKind(e.target.value)}
