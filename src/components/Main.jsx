@@ -10,13 +10,13 @@ import { doc, getDoc,  setDoc, updateDoc } from 'firebase/firestore';
 import { setTraining } from '../features/dataReducer';
 
 export const Main = () => {
-    const [currentMonth, setCurrentMonth] = useState(getMonth());
 
     const MonthStr = ["","Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
 
     const usedispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const training = useSelector((state) => state.data.training)
+    const monthIndex = useSelector((state) => state.data.monthIndex);
 
     useEffect(() => {
         auth.onAuthStateChanged((loginUser) => {
@@ -60,8 +60,8 @@ export const Main = () => {
     }
     // データの取得
     useEffect(() => {
-        getDataM(Number(getMonth()[1][1].format("MM")))
-    },[user,getMonth()[1][1].format("MM")]);
+        getDataM(Number(getMonth(monthIndex)[1][1].format("MM")))
+    },[user,monthIndex]);
 
     const saveData = async (m) => {
         if(user===null || user.uid===undefined) return;
@@ -77,7 +77,7 @@ export const Main = () => {
     }
 
     useEffect(() => {
-        saveData(Number(getMonth()[1][1].format("MM")));
+        saveData(Number(getMonth(monthIndex)[1][1].format("MM")));
     },[training]);
 
     return (
@@ -87,7 +87,7 @@ export const Main = () => {
             className='h-screen flex flex-1 flex-col'
         >
             <CalendarHeader />
-            <Month month={getMonth()} />
+            <Month month={getMonth(monthIndex)} />
         </div>)
         :
         (<div className='flex-1'>

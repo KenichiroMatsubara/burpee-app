@@ -15,8 +15,11 @@ const DataList = (props) => {
 
 
     const deleteData = (pos) => {
+        const deletedTraining = [...training[modularNumber]];
+        deletedTraining.splice(pos,1);
         const newTraining = [...training];
-        newTraining[modularNumber]=[...newTraining[modularNumber]].splice(pos,1);
+        newTraining[modularNumber]=deletedTraining;
+        console.log(newTraining);
         usedispatch(setTraining(newTraining));
     }
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { trainingData } from "./trainingData";
+import dayjs from "dayjs";
 
 export const dataSlice = createSlice({
     name: "data",
@@ -9,6 +10,7 @@ export const dataSlice = createSlice({
         onAddModular: false,
         onDataModular: false,
         onLogOut: false,
+        monthIndex: dayjs().month(),
         modularNumber: 0,
         training: trainingData,
     },
@@ -31,6 +33,9 @@ export const dataSlice = createSlice({
             state.onDataModular = action.payload;
         },
 
+        setMonthIndex: (state,action) => {
+            state.monthIndex = action.payload;
+        },
         setTraining: (state,action) => {
             state.training=action.payload;
         },
@@ -42,4 +47,4 @@ export const dataSlice = createSlice({
 })
 
 export default dataSlice.reducer;
-export const {changeMode, setOnModular, setModularNumber, setOnAddModular, setOnDataModular, setTraining,setOnLogOut} = dataSlice.actions;
+export const {changeMode, setOnModular, setModularNumber, setOnAddModular, setOnDataModular, setMonthIndex, setTraining,setOnLogOut} = dataSlice.actions;

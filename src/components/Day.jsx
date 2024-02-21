@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModularNumber, setOnModular } from '../features/dataReducer';
-import Modular from './Modular';
 
 export const Day = (props) => {
     const { day, rowIdx } = props;
@@ -48,7 +47,7 @@ export const Day = (props) => {
         setOnRunMark(false);
         setOnStudiedMark(false);
         trainingD.map((data,index) => {
-            if(data.year === Number(day.format("YYYY"))){
+            if(data.year === Number(day.format("YYYY")) && !(rowIdx===0 && Number(day.format("DD"))>10) && !(rowIdx===4 && Number(day.format("DD"))<=20)){
                 if(data.kind==="burpee"){
                     setOnBurpeedMark(true);
                 }
