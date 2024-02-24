@@ -18,6 +18,7 @@ export const Main = () => {
     const MonthStr = ["","Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
 
     const usedispatch = useDispatch();
+
     const user = useSelector((state) => state.user.user);
     const training = useSelector((state) => state.data.training)
     const monthIndex = useSelector((state) => state.data.monthIndex);
@@ -118,6 +119,7 @@ export const Main = () => {
                 className='absolute top-0 right-0 m-2 text-3xl'
                 onClick={() => pushHamburger()}
             />
+            <CalendarHeader />
             {onLogOut && (
             <>
                 <SignOut />
@@ -125,7 +127,6 @@ export const Main = () => {
 
             {mode==="calendar" &&
             <>
-                <CalendarHeader />
                 <Month month={getMonth(monthIndex)} />
             </>}
             {mode==="graph" &&
