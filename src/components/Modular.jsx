@@ -34,7 +34,7 @@ const Modular = (props) => {
             className=' mr-auto ml-auto
                 text-center
                 border border-gray-800 bg-white
-                w-64 pb-2
+                w-48 pb-2
                 flex-col
             '
         >
@@ -79,7 +79,7 @@ const Modular = (props) => {
                     <p className='text-xs'>削除</p>
                 </div>
 
-                <div className='rounded-xl cursor-pointer hover:bg-gray-200
+                {/* <div className='rounded-xl cursor-pointer hover:bg-gray-200
                     flex flex-col
                     '
                     onClick={() => pushDeleteMemo()}
@@ -90,7 +90,7 @@ const Modular = (props) => {
                         '
                     />
                     <p className='text-xs'>メモ</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )
