@@ -63,6 +63,12 @@ export const Graph = (props) => {
         title: {
             text: graphText,
         },
+        yAxis: {
+            title: {
+                text: "回数",
+            },
+            min: 0,
+        },
         series: [{
             type: 'line',
             data: graphData,

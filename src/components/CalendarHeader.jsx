@@ -26,7 +26,7 @@ export const CalendarHeader = () => {
                 onClick={handleNextMonth}
             />
             <div className=''>
-                {getMonth(monthIndex)[1][1].format("YYYY")}年{monthIndex+1}月
+                {getMonth(monthIndex)[1][1].format("YYYY")}年{Number(getMonth(monthIndex)[1][1].format("MM"))}月
             </div>
         </div>
     )

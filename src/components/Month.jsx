@@ -46,17 +46,22 @@ export const Month = (props) => {
                 ))}
             </div>
             <div className='flex-1 grid grid-cols-7 grid-rows-5 h-96'>
-                {month.map((row,i) => (
-                    <React.Fragment key={i}>
-                        {row.map((day,idx) => (
-                            <Day
-                                day={day}
-                                key={idx}
-                                rowIdx={i}
-                            />
-                        ))}
-                    </React.Fragment>
-                ))}
+                {month.map((row,i) => {
+                    //カレンダーのある行が次の月の日付しか映さないときそれを表示しないしない
+                    if(!(i>=4 && Number(row[0].format("DD"))<=20)){
+                        return (
+                            <React.Fragment key={i}>
+                                {row.map((day,idx) => (
+                                    <Day
+                                        day={day}
+                                        key={idx}
+                                        rowIdx={i}
+                                    />
+                                ))}
+                            </React.Fragment>
+                        );
+                    }
+                })}
             </div>
         </div>
     )

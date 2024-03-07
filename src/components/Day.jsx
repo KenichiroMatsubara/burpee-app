@@ -21,7 +21,7 @@ export const Day = (props) => {
             if(rowIdx===0 && Number(day.format("DD"))>10){
                 dayClass+=" text-gray-400";
             }
-            else if(rowIdx===4 && Number(day.format("DD"))<=20){
+            else if(rowIdx>=4 && Number(day.format("DD"))<=20){
                 dayClass+=" text-gray-400";
             }
             if(day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")){
@@ -47,7 +47,7 @@ export const Day = (props) => {
         setOnRunMark(false);
         setOnStudiedMark(false);
         trainingD.map((data,index) => {
-            if(data.year === Number(day.format("YYYY")) && !(rowIdx===0 && Number(day.format("DD"))>10) && !(rowIdx===4 && Number(day.format("DD"))<=20)){
+            if(data.year === Number(day.format("YYYY")) && !(rowIdx===0 && Number(day.format("DD"))>10) && !(rowIdx>=4 && Number(day.format("DD"))<=20)){
                 if(data.kind==="burpee"){
                     setOnBurpeedMark(true);
                 }
@@ -66,9 +66,12 @@ export const Day = (props) => {
     },[trainingD]);
 
     const clickDay = () => {
+        const today = new Date();
+        // 未来の予定を作ることをできなくする
+        if(Number(today.getFullYear())*10000+(Number(today.getMonth())+1)*100+Number(today.getDate()) < Number(day.format("YYYY"))*10000+Number(day.format("MM"))*100+Number(day.format("DD"))) return;
         if(onModular==true) return;
         else if(rowIdx===0 && Number(day.format("DD")>10)) return;
-        else if(rowIdx===4 && Number(day.format("DD"))<=20) return;
+        else if(rowIdx>=4 && Number(day.format("DD"))<=20) return;
         dispatch(setOnModular(true));
         dispatch(setDayIndex(Number(day.format("DD"))));
     }
